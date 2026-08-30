@@ -1,102 +1,162 @@
 # 🌋 Subsidence Monitoring System
 
-### AI-Powered Ground Subsidence & Landslide Risk Detection with Telegram Alerts
+### AI-Powered Ground Subsidence & Landslide Risk Detection with Automated Telegram Alerts
 
-An intelligent **sensor-based monitoring system** that uses Machine Learning to analyze ground movement and environmental conditions, estimate the probability of a landslide/subsidence event, and automatically send an emergency **Telegram alert** when dangerous conditions are detected.
+An intelligent sensor-monitoring prototype that uses **Machine Learning** to analyze ground movement and environmental conditions, estimate landslide risk, visualize sensor data, and automatically send an emergency **Telegram alert** when critical conditions are detected.
 
 ---
 
-## 🚨 Project Overview
+## 🎬 Demo
 
-Ground subsidence and slope instability can develop gradually before becoming a major hazard.
+> **Watch the complete system in action — from sensor input to ML prediction, risk classification, Telegram alert, and monitoring dashboard.**
 
-This project demonstrates a prototype early-warning system that combines:
+### ▶️ Demo Video
 
-**Sensor Data + Machine Learning + Risk Analysis + Visualization + Automated Alerts**
+**[🎥 Watch the Subsidence Monitoring System Demo](./demo/landslide-demo.mp4)**
 
-The system takes four sensor readings:
+### Demo Flow
+
+```text
+🚀 START SYSTEM
+      │
+      ▼
+🤖 TRAIN RANDOM FOREST MODEL
+      │
+      ▼
+📡 ENTER SENSOR READINGS
+      │
+      ▼
+🧠 ML RISK PREDICTION
+      │
+      ▼
+📊 CALCULATE PROBABILITY
+      │
+      ▼
+🚦 RISK CLASSIFICATION
+      │
+      ├───────────────┐
+      │               │
+      ▼               ▼
+🟢 LOW/MEDIUM      🔴 HIGH RISK
+      │               │
+      │               ▼
+      │        📲 TELEGRAM ALERT
+      │               │
+      └───────┬───────┘
+              ▼
+       📈 DASHBOARD
+```
+
+The demo showcases the complete pipeline:
+
+**Sensor Data → Machine Learning → Risk Prediction → Alert System → Visualization**
+
+---
+
+# 🚨 Overview
+
+Ground subsidence and slope instability can develop before a major landslide occurs.
+
+This project demonstrates how multiple sensor measurements can be combined with Machine Learning to create a prototype **early-warning monitoring system**.
+
+The system monitors four parameters:
 
 * 📐 **Tilt**
 * 📳 **Vibration**
 * 🧪 **Strain**
 * 🌡️ **Temperature**
 
-A **Random Forest Classifier** analyzes these measurements and produces a probability-based risk assessment.
+A **Random Forest Classifier** processes these measurements and predicts the probability of a landslide-related risk.
 
-If the predicted risk reaches the critical threshold, the system automatically sends an alert through **Telegram**.
-
----
-
-## ⚡ Key Features
-
-* 🤖 **Random Forest Machine Learning**
-* 📡 Multi-sensor monitoring
-* 📊 Probability-based risk prediction
-* 🚦 LOW / MEDIUM / HIGH risk classification
-* 🚨 Automatic Telegram emergency alerts
-* 💾 Trained model persistence using Joblib
-* 📈 Sensor monitoring dashboard
-* 🧠 Feature importance visualization
-* 📉 Recent risk trend visualization
-* 🕐 Timestamped alerts
+When the predicted probability reaches the high-risk threshold, the system automatically sends an emergency notification through Telegram.
 
 ---
 
-## 🧠 System Architecture
+# ✨ Features
+
+| Feature                    | Description                         |
+| -------------------------- | ----------------------------------- |
+| 🤖 Machine Learning        | Random Forest based risk classifier |
+| 📐 Tilt Monitoring         | Detects abnormal inclination        |
+| 📳 Vibration Monitoring    | Detects unusual vibration levels    |
+| 🧪 Strain Monitoring       | Tracks structural/ground strain     |
+| 🌡️ Temperature Monitoring | Monitors environmental temperature  |
+| 📊 Risk Probability        | Calculates probability from 0–100%  |
+| 🚦 Risk Classification     | LOW / MEDIUM / HIGH                 |
+| 🚨 Telegram Alerts         | Automatic emergency notification    |
+| 💾 Model Persistence       | Saves trained model using Joblib    |
+| 📈 Dashboard               | Visual sensor and risk monitoring   |
+| 🧠 Feature Importance      | Shows model feature contribution    |
+| 📉 Risk Trend              | Displays recent risk trend          |
+
+---
+
+# 🧠 System Architecture
 
 ```text
-                    ┌───────────────────────┐
-                    │    SENSOR INPUTS      │
-                    ├───────────────────────┤
-                    │                       │
-                    │  📐 Tilt              │
-                    │  📳 Vibration         │
-                    │  🧪 Strain            │
-                    │  🌡️ Temperature       │
-                    │                       │
-                    └───────────┬───────────┘
-                                │
-                                ▼
-                    ┌───────────────────────┐
-                    │   RANDOM FOREST ML    │
-                    │        MODEL          │
-                    └───────────┬───────────┘
-                                │
-                                ▼
-                    ┌───────────────────────┐
-                    │  RISK PROBABILITY     │
-                    │       0 - 100%        │
-                    └───────────┬───────────┘
-                                │
-              ┌─────────────────┼─────────────────┐
-              ▼                 ▼                 ▼
-         🟢 LOW RISK       🟠 MEDIUM RISK     🔴 HIGH RISK
-             <30%             30-60%             ≥60%
-                                                   │
-                                                   ▼
-                                      ┌─────────────────────┐
-                                      │  TELEGRAM ALERT 🚨  │
-                                      └─────────────────────┘
+                     ┌─────────────────────────┐
+                     │      SENSOR INPUTS      │
+                     ├─────────────────────────┤
+                     │                         │
+                     │  📐 Tilt                │
+                     │  📳 Vibration           │
+                     │  🧪 Strain              │
+                     │  🌡️ Temperature         │
+                     │                         │
+                     └────────────┬────────────┘
+                                  │
+                                  ▼
+                     ┌─────────────────────────┐
+                     │   RANDOM FOREST MODEL  │
+                     │                         │
+                     │   Machine Learning      │
+                     └────────────┬────────────┘
+                                  │
+                                  ▼
+                     ┌─────────────────────────┐
+                     │   RISK PROBABILITY      │
+                     │        0 - 100%         │
+                     └────────────┬────────────┘
+                                  │
+                 ┌────────────────┼────────────────┐
+                 │                │                │
+                 ▼                ▼                ▼
+             🟢 LOW           🟠 MEDIUM         🔴 HIGH
+              <30%             30-60%             ≥60%
+                 │                │                │
+                 │                │                ▼
+                 │                │       ┌─────────────────┐
+                 │                │       │ TELEGRAM ALERT  │
+                 │                │       └─────────────────┘
+                 │                │                │
+                 └────────────────┴────────────────┘
+                                  │
+                                  ▼
+                     ┌─────────────────────────┐
+                     │    MONITORING DASHBOARD │
+                     └─────────────────────────┘
 ```
 
 ---
 
 # 📊 Sensor Parameters
 
-| Parameter       |   Example | Purpose                                     |
-| --------------- | --------: | ------------------------------------------- |
-| 📐 Tilt         |    `0.5°` | Detects abnormal ground/surface inclination |
-| 📳 Vibration    |  `0.03 g` | Detects unusual ground vibration            |
-| 🧪 Strain       | `350 ohm` | Represents structural/ground strain         |
-| 🌡️ Temperature |    `27°C` | Environmental condition                     |
+The model uses four input features.
 
-These measurements are combined and passed to the machine-learning model.
+| Parameter       |   Example | Purpose                             |
+| --------------- | --------: | ----------------------------------- |
+| 📐 Tilt         |    `0.5°` | Detects abnormal inclination        |
+| 📳 Vibration    |  `0.03 g` | Detects unusual ground vibration    |
+| 🧪 Strain       | `350 ohm` | Represents structural/ground strain |
+| 🌡️ Temperature |    `27°C` | Environmental condition             |
+
+These parameters are combined and passed to the machine-learning model.
 
 ---
 
-# 🤖 Machine Learning
+# 🤖 Machine Learning Model
 
-The system uses a **Random Forest Classifier** from Scikit-learn.
+The project uses a **Random Forest Classifier** from Scikit-learn.
 
 ```python
 RandomForestClassifier(
@@ -107,20 +167,20 @@ RandomForestClassifier(
 )
 ```
 
-The model receives four features:
+### Input
 
 ```text
 [Tilt, Vibration, Strain, Temperature]
 ```
 
-and predicts:
+### Output
 
 ```text
 0 → NO LANDSLIDE
 1 → LANDSLIDE LIKELY
 ```
 
-The model also calculates a probability score:
+The model also generates a probability score:
 
 ```text
 0% ─────────────────────────────── 100%
@@ -132,30 +192,41 @@ The model also calculates a probability score:
 
 The current prototype generates **2,000 synthetic sensor samples** using NumPy.
 
-Risk conditions are simulated using combinations of sensor thresholds such as:
+The synthetic risk labels are generated using conditions such as:
 
 ```text
 |Tilt| > 1.5°
-Vibration > 0.12 g
-Strain > 380
-Temperature > 32°C + elevated vibration
 ```
 
-The generated dataset is then used to train the Random Forest model.
+```text
+Vibration > 0.12 g
+```
+
+```text
+Strain > 380
+```
+
+```text
+Temperature > 32°C
+AND
+Vibration > 0.08 g
+```
+
+The generated data is then used to train the Random Forest model.
 
 ### Why synthetic data?
 
-The prototype is designed to demonstrate the complete pipeline without requiring a large real-world geological dataset.
+This allows the complete Machine Learning pipeline to be demonstrated without requiring a large real-world geological dataset.
 
-> ⚠️ The current model is **not a scientifically validated geological prediction model**. Real-world deployment would require properly collected and labeled sensor data.
+> ⚠️ The current training dataset is synthetic and is intended for educational/prototype purposes.
 
 ---
 
 # 🚦 Risk Classification
 
-The predicted probability is converted into three risk levels:
+The model's probability output is converted into three risk categories.
 
-|   Probability | Level          | Action               |
+|   Probability | Risk Level     | System Response      |
 | ------------: | -------------- | -------------------- |
 |       `< 30%` | 🟢 LOW RISK    | Normal monitoring    |
 | `30% – < 60%` | 🟠 MEDIUM RISK | Increased monitoring |
@@ -165,9 +236,17 @@ The predicted probability is converted into three risk levels:
 
 # 🚨 Telegram Emergency Alert
 
-When the probability reaches **60% or above**, the system automatically sends a Telegram alert.
+The most important automation feature is the Telegram alert system.
 
-Example:
+When:
+
+```text
+Risk Probability ≥ 60%
+```
+
+the system automatically sends an emergency message.
+
+### Example Alert
 
 ```text
 🚨 LANDSLIDE ALERT 🚨
@@ -196,7 +275,7 @@ Strain:
 392 ohm
 
 Temperature:
-34°C
+34 °C
 
 ━━━━━━━━━━━━━━━━━━━━
 
@@ -206,57 +285,195 @@ Temperature:
 ⚠️ Immediate attention required.
 ```
 
-This makes the project more than just an ML prediction system — it demonstrates an **automated monitoring → prediction → emergency notification pipeline**.
+The alert contains both the **prediction** and the **sensor readings**, making it easier to understand why an alert was generated.
 
 ---
 
 # 📈 Monitoring Dashboard
 
-The system generates a visual dashboard using Matplotlib.
+After prediction, the system generates a Matplotlib dashboard.
 
-### Dashboard components
+The dashboard contains four components.
 
-**1. Current Sensor Readings**
+### 1️⃣ Current Sensor Readings
 
-Displays the current readings from all four sensors.
+Displays:
 
-**2. Landslide Probability**
+```text
+Tilt
+Vibration
+Strain
+Temperature
+```
 
-Displays the model's predicted probability from 0–100%.
+### 2️⃣ Landslide Probability
 
-**3. Model Feature Importance**
+Displays the predicted probability from:
 
-Shows which sensor parameters contribute most to the Random Forest's decisions.
+```text
+0% → 100%
+```
 
-**4. Recent Risk Trend**
+with threshold markers at:
 
-Displays a recent risk-probability trend for monitoring purposes.
+```text
+30% → Medium Risk
+60% → High Risk
+```
+
+### 3️⃣ Feature Importance
+
+Displays the relative importance of:
+
+```text
+Tilt
+Vibration
+Strain
+Temperature
+```
+
+This helps visualize which inputs the Random Forest model considers important.
+
+### 4️⃣ Recent Risk Trend
+
+Displays the recent risk-probability trend for monitoring purposes.
 
 ---
 
-# 🛠️ Technologies Used
+# 🖼️ Screenshots
+
+Add your screenshots inside the `assets` folder.
+
+### 📊 Monitoring Dashboard
+
+```markdown
+![Monitoring Dashboard](assets/dashboard.png)
+```
+
+### 🚨 Telegram Alert
+
+```markdown
+![Telegram Alert](assets/telegram-alert.png)
+```
+
+Recommended structure:
 
 ```text
-Python
-│
-├── NumPy
-│   └── Sensor data generation
-│
-├── Scikit-learn
-│   └── Random Forest Classifier
-│
-├── Joblib
-│   └── Model saving
-│
-├── Requests
-│   └── Telegram Bot API
-│
-├── Matplotlib
-│   └── Data visualization
-│
-└── Datetime
-    └── Alert timestamps
+assets/
+├── dashboard.png
+└── telegram-alert.png
 ```
+
+---
+
+# 🧪 Example Test Cases
+
+## 🟢 Low Risk
+
+Example sensor readings:
+
+```text
+Tilt:          0.3°
+Vibration:     0.02 g
+Strain:        345 ohm
+Temperature:   27°C
+```
+
+Expected behavior:
+
+```text
+LOW RISK
+```
+
+No Telegram alert is sent.
+
+---
+
+## 🟠 Medium Risk
+
+Example readings:
+
+```text
+Tilt:          1.2°
+Vibration:     0.08 g
+Strain:        365 ohm
+Temperature:   30°C
+```
+
+Expected behavior:
+
+```text
+MEDIUM RISK
+```
+
+No emergency alert is triggered.
+
+---
+
+## 🔴 High Risk
+
+Example readings:
+
+```text
+Tilt:          2.1°
+Vibration:     0.15 g
+Strain:        395 ohm
+Temperature:   34°C
+```
+
+Expected behavior:
+
+```text
+HIGH RISK
+```
+
+The system attempts to send:
+
+```text
+🚨 LANDSLIDE ALERT 🚨
+```
+
+to the configured Telegram chat.
+
+> These are example test inputs. The exact probability produced by the model may vary.
+
+---
+
+# 🛠️ Technology Stack
+
+```text
+                    PYTHON
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+        ▼              ▼              ▼
+      NumPy       Scikit-learn    Matplotlib
+        │              │              │
+        │              ▼              │
+        │       Random Forest          │
+        │              │              │
+        └──────────────┼──────────────┘
+                       │
+                 ┌─────▼─────┐
+                 │  Joblib   │
+                 │ ML Model  │
+                 └─────┬─────┘
+                       │
+                       ▼
+                 ┌───────────┐
+                 │ Requests  │
+                 │ Telegram  │
+                 └───────────┘
+```
+
+### Libraries
+
+* **NumPy** — numerical computation and synthetic sensor data
+* **Scikit-learn** — Random Forest machine learning
+* **Matplotlib** — visualization and dashboard
+* **Joblib** — model persistence
+* **Requests** — Telegram Bot API communication
+* **Datetime** — timestamps
 
 ---
 
@@ -268,7 +485,7 @@ Clone the repository:
 git clone https://github.com/prabuddha34/SubsidenceMonitoringSystem.git
 ```
 
-Enter the project directory:
+Navigate to the project:
 
 ```bash
 cd SubsidenceMonitoringSystem
@@ -280,17 +497,33 @@ Install dependencies:
 pip install numpy matplotlib scikit-learn joblib requests
 ```
 
+Or create a `requirements.txt`:
+
+```text
+numpy
+matplotlib
+scikit-learn
+joblib
+requests
+```
+
+Then:
+
+```bash
+pip install -r requirements.txt
+```
+
 ---
 
-# ▶️ Running the System
+# ▶️ Usage
 
-Run:
+Run the main program:
 
 ```bash
 python main.py
 ```
 
-The program will request the current sensor values:
+The program will ask for current sensor values:
 
 ```text
 ==============================================
@@ -303,36 +536,44 @@ Strain (ohm) [example 350]:
 Temperature (°C) [example 27]:
 ```
 
-The system then:
+The system then performs:
 
 ```text
-1. Generates training data
+Generate Training Data
         ↓
-2. Trains Random Forest
+Train Random Forest
         ↓
-3. Saves the ML model
+Save Model
         ↓
-4. Reads current sensor values
+Read Sensor Values
         ↓
-5. Calculates risk probability
+Predict Risk
         ↓
-6. Determines risk level
+Calculate Probability
         ↓
-7. Sends Telegram alert if HIGH RISK
+Classify Risk
         ↓
-8. Displays monitoring dashboard
+Send Telegram Alert
+        ↓
+Display Dashboard
 ```
 
 ---
 
-# 📁 Repository Structure
+# 📁 Project Structure
 
 ```text
 SubsidenceMonitoringSystem/
 │
 ├── main.py
-│
 ├── README.md
+│
+├── assets/
+│   ├── dashboard.png
+│   └── telegram-alert.png
+│
+├── demo/
+│   └── landslide-demo.mp4
 │
 └── landslide_sensor_model.pkl
 ```
@@ -341,11 +582,18 @@ SubsidenceMonitoringSystem/
 
 # 🔐 Security
 
-### ⚠️ Protect your Telegram credentials
+## Protect your Telegram credentials
 
-Never commit your bot token directly to GitHub.
+**Never commit your Telegram bot token to GitHub.**
 
-Use environment variables instead:
+Instead of hardcoding credentials:
+
+```python
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+CHAT_ID = "YOUR_CHAT_ID"
+```
+
+use environment variables:
 
 ```python
 import os
@@ -354,28 +602,38 @@ BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 ```
 
-For Windows PowerShell:
+### Windows PowerShell
 
 ```powershell
 $env:TELEGRAM_BOT_TOKEN="YOUR_BOT_TOKEN"
 $env:TELEGRAM_CHAT_ID="YOUR_CHAT_ID"
 ```
 
-### 🚨 Important
+### `.gitignore`
 
-If the Telegram bot token currently present in your `main.py` is a real active token, **regenerate it immediately using BotFather** before keeping the repository public.
+Add:
+
+```text
+.env
+*.pkl
+__pycache__/
+```
+
+If a real Telegram bot token has already been exposed publicly, **regenerate/revoke it before publishing the repository**.
 
 ---
 
 # 🔮 Future Improvements
 
-The current system can be developed into a real IoT-based monitoring platform.
+The prototype can be expanded into a complete IoT-based landslide monitoring platform.
 
-### 🔌 Hardware Integration
+## 🔌 Hardware Integration
+
+Possible hardware:
 
 * ESP32
 * Arduino
-* MPU6050
+* MPU6050 / IMU
 * Tilt sensors
 * Vibration sensors
 * Strain gauges
@@ -383,70 +641,93 @@ The current system can be developed into a real IoT-based monitoring platform.
 * Soil-moisture sensors
 * Rainfall sensors
 
-### ☁️ Cloud Integration
+---
+
+## 📡 Real-Time Monitoring
+
+Future architecture:
 
 ```text
-Sensors
-   ↓
-ESP32
-   ↓
-Internet
-   ↓
-Cloud Server
-   ↓
-ML Model
-   ↓
-Dashboard + Telegram
+Physical Sensors
+       │
+       ▼
+     ESP32
+       │
+       ▼
+   Internet
+       │
+       ▼
+ Cloud / Server
+       │
+       ▼
+ ML Prediction
+       │
+ ┌─────┴─────┐
+ ▼           ▼
+Dashboard   Alerts
 ```
-
-### 🧠 Advanced Machine Learning
-
-Future versions could compare:
-
-* Random Forest
-* XGBoost
-* Gradient Boosting
-* SVM
-* LSTM
-* Time-series models
-
-with real historical sensor measurements.
-
-### 🌐 Additional Features
-
-* Live web dashboard
-* GPS-based monitoring
-* Historical data storage
-* Multiple monitoring locations
-* Mobile notifications
-* SMS/WhatsApp alerts
-* Rainfall integration
-* Soil moisture monitoring
-* Long-term trend analysis
 
 ---
 
-# 🎯 Project Objective
+## 🌐 Web Dashboard
 
-The primary objective is to demonstrate how **Machine Learning can be combined with sensor monitoring and automated communication systems** to create an early-warning prototype for ground instability.
+Future versions could include:
+
+* Real-time graphs
+* Historical sensor data
+* Multiple monitoring locations
+* GPS coordinates
+* Sensor status
+* Risk maps
+* Alert history
+
+---
+
+## 🤖 Advanced ML
+
+The current Random Forest model could be compared with:
 
 ```text
-        SENSOR DATA
+Random Forest
+      ↓
+XGBoost
+      ↓
+Gradient Boosting
+      ↓
+SVM
+      ↓
+LSTM
+      ↓
+Time-Series Models
+```
+
+Future models could use historical sequences of sensor measurements rather than a single reading.
+
+---
+
+# 🎯 Project Goals
+
+The project demonstrates the integration of five major concepts:
+
+```text
+       📡 SENSOR DATA
              │
              ▼
-      MACHINE LEARNING
+      🤖 MACHINE LEARNING
              │
              ▼
-       RISK ANALYSIS
+       📊 RISK ANALYSIS
              │
        ┌─────┴─────┐
        ▼           ▼
-   MONITOR      ALERT 🚨
+   📈 MONITOR   🚨 ALERT
        │           │
        └─────┬─────┘
              ▼
        EARLY WARNING
 ```
+
+The main goal is to demonstrate how Machine Learning can be integrated with sensor monitoring and automated communication to create an early-warning prototype.
 
 ---
 
@@ -454,9 +735,9 @@ The primary objective is to demonstrate how **Machine Learning can be combined w
 
 This project is an **educational and experimental prototype**.
 
-The training data is synthetically generated and the risk thresholds are simplified. The system should **not be used as an actual geological emergency warning system**.
+The current model uses synthetically generated training data and simplified risk rules. It should **not be used as an actual geological emergency warning system**.
 
-A production system would require:
+A real deployment would require:
 
 * Real-world sensor data
 * Geological datasets
@@ -465,7 +746,8 @@ A production system would require:
 * Model validation
 * False-positive/false-negative analysis
 * Geological expert evaluation
-* Safety and reliability testing
+* Long-term monitoring
+* Independent safety validation
 
 ---
 
@@ -475,20 +757,34 @@ A production system would require:
 
 Computer Science & Engineering Student
 
-**Interests:**
+### Interests
 
 ```text
-Machine Learning
-IoT
-Cybersecurity
-Software Development
-Competitive Programming
+🤖 Machine Learning
+🔌 IoT
+🔐 Cybersecurity
+💻 Software Development
+🏆 Competitive Programming
 ```
+
+### GitHub
+
+**[@prabuddha34](https://github.com/prabuddha34)**
 
 ---
 
+# ⭐ Support
+
+If you found this project interesting, consider giving the repository a ⭐.
+
+Contributions, improvements, and ideas are welcome.
+
+---
+
+<div align="center">
+
 ### 🌋 Predict • Monitor • Analyze • Alert
 
-**Built with Python, Machine Learning, Sensor Analytics and Telegram Automation.**
+**Built with Python + Machine Learning + Sensor Analytics + Telegram Automation**
 
-⭐ If you find this project interesting, consider giving the repository a star.
+</div>
