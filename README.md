@@ -12,7 +12,12 @@ An intelligent sensor-monitoring prototype that uses **Machine Learning** to ana
 
 ### ▶️ Demo Video
 
-**[🎥 Watch the Subsidence Monitoring System Demo](./demo/landslide-demo.mp4)**
+
+https://github.com/user-attachments/assets/c69b14af-45ea-40da-9512-b39b82dc96ba
+
+
+
+
 
 ### Demo Flow
 
