@@ -117,8 +117,6 @@ Vibration:
 Strain:
 {strain_value} ohm
 
-Temperature:
-{temperature_value} °C
 
 ━━━━━━━━━━━━━━━━━━━━
 
