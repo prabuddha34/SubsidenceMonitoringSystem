@@ -7,7 +7,7 @@ import requests
 from datetime import datetime
 
 print("==============================================")
-print("LANDSLIDE RISK SYSTEM")
+print("Subsidence Risk SYSTEM")
 print("==============================================")
 
 BOT_TOKEN = "8736792125:AAHaXAF8jAXj2eHZ4W6mxNPF2jSDfZ-jAGs"
@@ -442,5 +442,5 @@ plt.tight_layout()
 plt.show()
 
 print("\n==============================================")
-print("LANDSLIDE SYSTEM FINISHED")
+print("Subsidence SYSTEM FINISHED")
 print("==============================================")
