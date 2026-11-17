@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
@@ -10,7 +9,7 @@ print("==============================================")
 print("Subsidence Risk SYSTEM")
 print("==============================================")
 
-BOT_TOKEN = "8736792125:AAHaXAF8jAXj2eHZ4W6mxNPF2jSDfZ-jAGs"
+BOT_TOKEN = "9042226904:AAFiMNj5NNs4bNQBR7te8Pnr6YGYINQ2uGk"
 CHAT_ID = "5857153902"
 
 print("\nCreating training data...")
@@ -76,11 +75,11 @@ model.fit(X, y)
 
 joblib.dump(
     model,
-    "landslide_sensor_model.pkl"
+    "subsidence_sensor_model.pkl"
 )
 
 print("Model trained successfully!")
-print("Model saved as landslide_sensor_model.pkl")
+print("Model saved as subsidence_sensor_model.pkl")
 
 
 def send_telegram_alert(
@@ -92,9 +91,9 @@ def send_telegram_alert(
 ):
 
     message = f"""
-🚨 LANDSLIDE ALERT 🚨
+🚨 SUBSIDENCE ALERT 🚨
 
-⚠️ HIGH LANDSLIDE RISK DETECTED
+⚠️ HIGH SUBSIDENCE RISK DETECTED
 
 ━━━━━━━━━━━━━━━━━━━━
 
@@ -206,9 +205,7 @@ strain_value = get_float(
     "Strain (ohm) [example 350]: "
 )
 
-temperature_value = get_float(
-    "Temperature (°C) [example 27]: "
-)
+temperature_value = 27.0  # assumed temperature (°C), no user input
 
 
 features = np.array([
@@ -251,7 +248,7 @@ print("PREDICTION RESULT")
 print("==============================================")
 
 print(
-    f"Landslide Probability : "
+    f"Subsidence Probability : "
     f"{probability * 100:.1f}%"
 )
 
@@ -264,9 +261,9 @@ print(
     "Binary Prediction     : "
     +
     (
-        "LANDSLIDE LIKELY"
+        "SUBSIDENCE LIKELY"
         if prediction == 1
-        else "NO LANDSLIDE"
+        else "NO SUBSIDENCE"
     )
 )
 
@@ -321,7 +318,7 @@ fig, axes = plt.subplots(
 )
 
 fig.suptitle(
-    "Landslide Sensor Dashboard",
+    "Subsidence Sensor Dashboard",
     fontsize=16,
     fontweight="bold"
 )
@@ -368,7 +365,7 @@ axes[0, 1].set_xlim(
 )
 
 axes[0, 1].set_title(
-    f"Landslide Probability: "
+    f"Subsidence Probability: "
     f"{probability * 100:.1f}%"
 )
 
